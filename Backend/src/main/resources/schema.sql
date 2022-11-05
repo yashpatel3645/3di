@@ -15,7 +15,6 @@ INSERT INTO online_bank.account (id, sort_code, account_number, current_balance,
 VALUES (2, '65-93-37', '21956204', 67051.01, 'High Street Bank', 'Scrooge McDuck');
 
 
-CREATE SEQUENCE online_bank.transaction_sequence START WITH 5;
 CREATE TABLE online_bank.transaction (
     id bigint NOT NULL PRIMARY KEY,
     source_account_id bigint NOT NULL REFERENCES online_bank.account(id),

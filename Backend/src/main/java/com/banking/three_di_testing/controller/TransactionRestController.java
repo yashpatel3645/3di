@@ -40,13 +40,11 @@ public class TransactionRestController {
         this.transactionService = transactionService;
     }
 
-    @PostMapping(value = "/transactions",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/transactions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> makeTransfer(
             @Valid @RequestBody TransactionInput transactionInput) {
         if (InputValidator.isSearchTransactionValid(transactionInput)) {
-//            new Thread(() -> transactionService.makeTransfer(transactionInput));
+            // new Thread(() -> transactionService.makeTransfer(transactionInput));
             boolean isComplete = transactionService.makeTransfer(transactionInput);
             return new ResponseEntity<>(isComplete, HttpStatus.OK);
         } else {
@@ -54,9 +52,7 @@ public class TransactionRestController {
         }
     }
 
-    @PostMapping(value = "/withdraw",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/withdraw", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> withdraw(
             @Valid @RequestBody WithdrawInput withdrawInput) {
         LOGGER.debug("Triggered AccountRestController.withdrawInput");
@@ -82,10 +78,7 @@ public class TransactionRestController {
         }
     }
 
-
-    @PostMapping(value = "/deposit",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/deposit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deposit(
             @Valid @RequestBody DepositInput depositInput) {
         LOGGER.debug("Triggered AccountRestController.depositInput");
@@ -122,13 +115,10 @@ public class TransactionRestController {
         return errors;
     }
 
-
-
-
-    @PutMapping(value ="/alltransactions")
+    @PutMapping(value = "/alltransactions")
     public ResponseEntity<?> getAllTransactions(
             @Valid @RequestBody AccountInput accountInput) {
-//        System.out.println(accountInput);
+        // checking all data is coming from front-end or not
         System.out.print("accountInput: " + accountInput);
         LOGGER.debug("Triggered TransactionRestController.getAllTransactions");
 
@@ -141,7 +131,10 @@ public class TransactionRestController {
             if (account == null) {
                 return new ResponseEntity<>(constants.NO_ACCOUNT_FOUND, HttpStatus.OK);
             } else {
-               Account _account = accountService.findTransactionsBySourceCodeAndAccountNumber(account.getAccountNumber(), account.getSortCode(), accountInput.getStartDate(), accountInput.getEndDate());
+                // Pass data with start date and end date
+                Account _account = accountService.findTransactionsBySourceCodeAndAccountNumber(
+                        account.getAccountNumber(), account.getSortCode(), accountInput.getStartDate(),
+                        accountInput.getEndDate());
                 return new ResponseEntity<>(_account, HttpStatus.OK);
             }
         } else {

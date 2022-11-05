@@ -17,14 +17,17 @@ public class AccountInput {
     @NotBlank(message = "End Date is mandatory")
     private String endDate;
 
-    public AccountInput() {}
+    public AccountInput() {
+    }
 
     public String getSortCode() {
         return sortCode;
     }
+
     public void setSortCode(String sortCode) {
         this.sortCode = sortCode;
     }
+
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -33,6 +36,8 @@ public class AccountInput {
         this.accountNumber = accountNumber;
     }
 
+    // made getter and setter for Start Date
+
     public String getStartDate() {
         return startDate;
     }
@@ -40,6 +45,8 @@ public class AccountInput {
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
+
+    // made getter and setter for End Date
 
     public String getEndDate() {
         return endDate;
@@ -61,13 +68,15 @@ public class AccountInput {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         AccountInput that = (AccountInput) o;
         return Objects.equals(sortCode, that.sortCode) &&
-                Objects.equals(accountNumber, that.accountNumber)&&
-                Objects.equals(startDate, that.startDate)&&
-                Objects.equals(endDate, that.endDate);
+                Objects.equals(accountNumber, that.accountNumber) &&
+                Objects.equals(startDate, that.startDate) && // Passed start date
+                Objects.equals(endDate, that.endDate); // passed end date
     }
 
     @Override

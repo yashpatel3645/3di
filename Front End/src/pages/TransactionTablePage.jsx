@@ -34,8 +34,8 @@ const TransactionTablePage = () => {
     const accountInput = {
       sortCode,
       accountNumber,
-      startDate,
-      endDate,
+      startDate, // Pass startDate value to backend
+      endDate, // Pass endDate value to backend
     };
     const headers = {
       'Content-Type': 'application/json',
@@ -165,8 +165,8 @@ const TransactionTablePage = () => {
                   })
                 ) : (
                   <tr>
-                    <td colSpan="4">No Records Avalible</td>
-                  </tr>
+                    <td colSpan="4">No Records Avaliable</td>
+                  </tr> // if there is no record it shows no record Avaliable
                 )}
               </tbody>
             </table>

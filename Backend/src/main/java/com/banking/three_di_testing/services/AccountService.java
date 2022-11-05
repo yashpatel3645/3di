@@ -17,7 +17,7 @@ public class AccountService {
     private final TransactionRepository transactionRepository;
 
     public AccountService(AccountRepository accountRepository,
-                          TransactionRepository transactionRepository) {
+            TransactionRepository transactionRepository) {
         this.accountRepository = accountRepository;
         this.transactionRepository = transactionRepository;
     }
@@ -26,9 +26,8 @@ public class AccountService {
         Optional<Account> account = accountRepository
                 .findBySortCodeAndAccountNumber(sortCode, accountNumber);
 
-        account.ifPresent(value ->
-                value.setTransactions(transactionRepository
-                        .findBySourceAccountIdOrderByInitiationDate(value.getId())));
+        account.ifPresent(value -> value.setTransactions(transactionRepository
+                .findBySourceAccountIdOrderByInitiationDate(value.getId())));
 
         return account.orElse(null);
     }
@@ -42,23 +41,26 @@ public class AccountService {
 
     public Account createAccount(String bankName, String ownerName) {
         CodeGenerator codeGenerator = new CodeGenerator();
-        Account newAccount = new Account(bankName, ownerName, codeGenerator.generateSortCode(), codeGenerator.generateAccountNumber(), 0.00);
+        Account newAccount = new Account(bankName, ownerName, codeGenerator.generateSortCode(),
+                codeGenerator.generateAccountNumber(), 0.00);
         return accountRepository.save(newAccount);
     }
 
-    public Account findTransactionsBySourceCodeAndAccountNumber(String accountNumber, String sortCode, String startDate, String endDate) {
+    public Account findTransactionsBySourceCodeAndAccountNumber(String accountNumber, String sortCode, String startDate,
+            String endDate) {
         Optional<Account> account = accountRepository
                 .findBySortCodeAndAccountNumber(sortCode, accountNumber);
 
         System.out.println("Account List: " + account);
 
         account.ifPresent(value ->
-                {
-                    System.out.println("Value: " + value);
-                    value.setTransactions(transactionRepository
-                            .findAllByDate(startDate, endDate, value.getId()));
-                }
-        );
+
+        // made new method FindAllByDate in repository and called here.
+        {
+            System.out.println("Value: " + value);
+            value.setTransactions(transactionRepository
+                    .findAllByDate(startDate, endDate, value.getId()));
+        });
 
         return account.orElse(null);
     }

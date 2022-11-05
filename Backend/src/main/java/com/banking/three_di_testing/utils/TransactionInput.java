@@ -22,38 +22,48 @@ public class TransactionInput {
 
     private String reference;
 
-    public TransactionInput() {}
+    public TransactionInput() {
+    }
 
     public AccountInput getSourceAccount() {
         return sourceAccount;
     }
+
     public void setSourceAccount(AccountInput sourceAccount) {
         this.sourceAccount = sourceAccount;
     }
+
     public AccountInput getTargetAccount() {
         return targetAccount;
     }
+
     public void setTargetAccount(AccountInput targetAccount) {
         this.targetAccount = targetAccount;
     }
+
     public double getAmount() {
         return amount;
     }
+
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
     public String getReference() {
         return reference;
     }
+
     public void setReference(String reference) {
         this.reference = reference;
     }
 
-    public LocalDateTime getStartDate(){
+    // get start Date
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public LocalDateTime getEndDate(){
+    // get end date
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
@@ -64,8 +74,8 @@ public class TransactionInput {
                 ", targetAccount=" + targetAccount +
                 ", amount=" + amount +
                 ", reference='" + reference + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", startDate=" + startDate + // add start date in string
+                ", endDate=" + endDate + // add end date in string
                 '}';
     }
 }

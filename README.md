@@ -13,5 +13,5 @@ npm run start
 1. change database password in Backend -> src -> main -> resources -> application.properties right now it is 'yashpatel' chnage with your passsword.
 
 2. run mysql syntex from folder
-	Backend -> Source -> Main -> Resourse -> Schema.sql
+	Backend -> Src -> Main -> Resourse -> Schema.sql
 	run All syntexs.

@@ -1,5 +1,3 @@
-# 3di
-
 ## Follow the below steps to run the project
 
 ### Frontend
